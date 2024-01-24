@@ -1,0 +1,2 @@
+# lostinmymind
+🌃 - anonymously encrypted chatroom 
