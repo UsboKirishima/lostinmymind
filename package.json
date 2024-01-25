@@ -1,0 +1,13 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@types/crypto-js": "^4.2.2"
+  },
+  "devDependencies": {
+    "lerna": "^7.1.4"
+  }
+}
