@@ -59,7 +59,7 @@ app.post("/post", async (req, res) => {
         author: e_author,
         content: e_content
     }).then(async (r) => {
-        await console.table(await db.get(`chats.${id}.messages`));
+        await console.log(`Created message in 'id: "${id}"' with 'content: "${content}"'`);
     }).catch(async (err) => {
         await res.status(401).json({ error: `Database Error` });
         return console.error(err)
@@ -80,8 +80,6 @@ app.get("/get", async (req, res) => {
     if (!key || !id) return res.status(401).json({ error: "Missing some parameters `id`, `key`" });
 
     let chat = await db.get(`chats.${id}.messages`).then(async (r) => {
-        console.log(r);
-
         //Descrypt message array
         await r.map(async (m) => {
             m.author = await CryptoJS.AES.decrypt(m.author, key).toString(CryptoJS.enc.Utf8);
