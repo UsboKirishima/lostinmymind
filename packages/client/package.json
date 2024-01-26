@@ -1,0 +1,23 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "build": "tsc",
+    "clear": "rm -rf dist"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/colors": "^1.2.1",
+    "@types/inquirer": "^9.0.7",
+    "axios": "^1.6.7",
+    "colors": "^1.4.0",
+    "dotenv": "^16.4.1",
+    "inquirer": "^9.2.12",
+    "inquirer-press-to-continue": "^1.2.0",
+    "quick.db": "^9.1.7"
+  }
+}

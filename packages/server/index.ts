@@ -71,7 +71,7 @@ app.post("/post", async (req, res) => {
     });
 })
 
-app.get("/get", async (req, res) => {
+app.post("/get", async (req, res) => {
     const body = req.body;
 
     let key = body.key,
