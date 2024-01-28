@@ -15,6 +15,11 @@ import axios from 'axios';
 
 import 'dotenv/config'
 
+interface MessageType {
+    author: string;
+    content: string;
+}
+
 const privacyAccept = async () => {
     await console.log(colors.red(banner));
     await console.log(colors.red(privacyPolicy));
@@ -64,6 +69,53 @@ const getChatKey = async () => {
     return chatKey;
 }
 
+const getChatUsername = async () => {
+    const { chatUsername } = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'chatUsername',
+            prefix: '',
+            message: `${colors.dim('Chat username')} ${colors.cyan('~')} $ `
+        },
+    ]);
+
+    return chatUsername;
+}
+
+const createChat = async () => {
+    await console.clear()
+    await mainMenu();
+
+    let id = await getChatId();
+    let key = await getChatKey();
+
+    let data;
+
+    await axios.post(`${process.env.SERVER_URL}/new`, {
+        id: `${id}`,
+        key: `${key}`
+    }, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(async (response) => {
+        if (response.status == 200)
+            await console.log(colors.green(`Successfully created new chat with \`id: ${response.data.id}\` and \`key: ${response.data.key}\``))
+        else if (response.status == 401)
+            await console.error(`${colors.red('ERROR')} ${colors.dim(`~ ${response.data.error || 'Found an error. If you think this is a bug contact us at https://github.com/UsboKirishima/lostinmymind/issues'}`)}`)
+        else
+            await console.error('Found an error. If you think this is a bug contect use at https://github.com/UsboKirishima/lostinmymind/issues');
+    }).catch(async (error) => {
+        if (error.status == 200)
+            await console.log(colors.green(`Successfully created new chat with \`id: ${error.data.id}\` and \`key: ${error.data.key}\``))
+        else if (error.status == 401)
+            await console.error(`${colors.red('ERROR')} ${colors.dim(`~ ${error.data.error || 'Found an error. If you think this is a bug contact us at https://github.com/UsboKirishima/lostinmymind/issues'}`)}`)
+        else
+            await console.error('Found an error. If you think this is a bug contect use at https://github.com/UsboKirishima/lostinmymind/issues');
+    });
+
+}
+
 const fastChat = async () => {
 
     await console.clear()
@@ -71,6 +123,9 @@ const fastChat = async () => {
 
     let id = await getChatId();
     let key = await getChatKey();
+    let username = await getChatUsername();
+
+    let data;
 
     await axios.post(`${process.env.SERVER_URL}/get`, {
         id: `${id}`,
@@ -80,10 +135,44 @@ const fastChat = async () => {
             'Content-Type': 'application/json'
         }
     }).then(async (response) => {
-        console.table(response.data);
+        //console.table(response.data);
+        data = response.data;
     }).catch(async (error) => {
         console.log(error);
     });
+
+    await data.map(async (message: MessageType) => {
+        let contentSplitted = await message.content.split('');
+        let formattedContent = "┌──────────────────────────────────────────┐";
+
+        for (let i = 0; i <= message.content.length; i = i + 40) {
+            formattedContent += `\n│ ${await message.content.slice(i, i + 40)} ${message.content.length >= 40 ? '│' : ''}`;
+        }
+
+        //formattedContent = formattedContent.slice(-1);
+
+        if (message.content.length >= 40) {
+            /*for(let i = 1; i <= message.content.length % 40; i++) {
+                formattedContent += " ";
+            }*/
+        } else {
+            for (let i = 1; i <= 40 - message.content.length % 40; i++) {
+                formattedContent += " ";
+            }
+        }
+
+        formattedContent += "│";
+        formattedContent += "\n└──────────────────────────────────────────┘";
+
+        let formattedSenderMessage = `${colors.green(message.author)}\n${colors.dim(formattedContent)}`;
+
+
+        if (message.author === username) {
+            await console.log(formattedSenderMessage);
+        } else {
+            await console.log(formattedSenderMessage);
+        }
+    })
 }
 
 const parseOption = async () => {
@@ -96,6 +185,7 @@ const parseOption = async () => {
         case '2' || '02':
             break;
         case '3' || '03':
+            await createChat();
             break;
         case '4' || '04':
             await fastChat();
