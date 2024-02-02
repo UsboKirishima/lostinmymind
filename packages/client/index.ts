@@ -18,6 +18,10 @@ import { QuickDB } from "quick.db";
 
 export const db = new QuickDB();
 
+import { Client } from 'discord-rpc';
+
+const rpcClient = await new Client({ transport: 'ipc'});
+
 import 'dotenv/config'
 
 interface MessageType {
@@ -29,6 +33,16 @@ interface ChatType {
     id: string;
     key: string;
 }
+
+//Discord RPC
+await rpcClient.on('ready', async () => {
+    await rpcClient.setActivity({
+        largeImageKey: 'lost',
+    })
+    .catch(async (error: Error) => await console.error(error))
+})
+
+await rpcClient.login({ clientId: '1199391100406874212' })
 
 const privacyAccept = async () => {
     await console.log(colors.red(banner));

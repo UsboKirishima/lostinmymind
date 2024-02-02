@@ -527,6 +527,18 @@
   resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.2.2.tgz#771c4a768d94eb5922cc202a3009558204df0cea"
   integrity sha512-sDOLlVbHhXpAUAL0YHDUUwDZf3iN4Bwi4W6a0W0b+QcAezUbRtH4FVb+9J4h+XFPW7l/gQ9F8qC7P+Ec4k8QVQ==
 
+"@types/discord-rpc@^4.0.8":
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/@types/discord-rpc/-/discord-rpc-4.0.8.tgz#454a34b9fc18e91a16f044a697ca56219eb2af85"
+  integrity sha512-1tZf217Natkj+TziNXRRLwNmdm5GNa1bnrQr8VWowquo/Su5hMjdhobj8URxW1COMk2da28XCU1ahsYCAlxirA==
+  dependencies:
+    "@types/events" "*"
+
+"@types/events@*":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.3.tgz#a8ef894305af28d1fc6d2dfdfc98e899591ea529"
+  integrity sha512-trOc4AAUThEz9hapPtSd7wf5tiQKvTtu5b371UxXdTuqzIh0ArcRspRP0i0Viu+LXstIQ1z96t1nsPxT9ol01g==
+
 "@types/express-serve-static-core@^4.17.33":
   version "4.17.41"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.41.tgz#5077defa630c2e8d28aa9ffc2c01c157c305bef6"
@@ -866,7 +878,7 @@ better-sqlite3@^9.3.0:
     bindings "^1.5.0"
     prebuild-install "^7.1.1"
 
-bindings@^1.5.0:
+bindings@^1.3.0, bindings@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
   integrity sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
@@ -1535,6 +1547,16 @@ dir-glob@^3.0.1:
   integrity sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
   dependencies:
     path-type "^4.0.0"
+
+discord-rpc@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/discord-rpc/-/discord-rpc-4.0.1.tgz#a89aa04a048aa83ad4f347d53fa0162501eae0d8"
+  integrity sha512-HOvHpbq5STRZJjQIBzwoKnQ0jHplbEWFWlPDwXXKm/bILh4nzjcg7mNqll0UY7RsjFoaXA7e/oYb/4lvpda2zA==
+  dependencies:
+    node-fetch "^2.6.1"
+    ws "^7.3.1"
+  optionalDependencies:
+    register-scheme "github:devsnek/node-register-scheme"
 
 dot-prop@^5.1.0:
   version "5.3.0"
@@ -3380,6 +3402,11 @@ node-abi@^3.3.0:
   dependencies:
     semver "^7.3.5"
 
+node-addon-api@^1.3.0:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-1.7.2.tgz#3df30b95720b53c24e59948b49532b662444f54d"
+  integrity sha512-ibPK3iA+vaY1eEjESkQkM0BbCqFOaZMiXRTtdB0u7b4djtY6JnsjvPdUHVMg6xQt3B8fpTTWHI9A+ADjM9frzg==
+
 node-addon-api@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-3.2.1.tgz#81325e0a2117789c0128dab65e7e38f07ceba161"
@@ -3392,7 +3419,7 @@ node-fetch@2.6.7:
   dependencies:
     whatwg-url "^5.0.0"
 
-node-fetch@^2.6.7:
+node-fetch@^2.6.1, node-fetch@^2.6.7:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
@@ -4206,6 +4233,13 @@ regexp.prototype.flags@^1.5.1:
     call-bind "^1.0.2"
     define-properties "^1.2.0"
     set-function-name "^2.0.0"
+
+"register-scheme@github:devsnek/node-register-scheme":
+  version "0.0.2"
+  resolved "https://codeload.github.com/devsnek/node-register-scheme/tar.gz/e7cc9a63a1f512565da44cb57316d9fb10750e17"
+  dependencies:
+    bindings "^1.3.0"
+    node-addon-api "^1.3.0"
 
 require-directory@^2.1.1:
   version "2.1.1"
@@ -5110,6 +5144,11 @@ write-pkg@4.0.0:
     sort-keys "^2.0.0"
     type-fest "^0.4.1"
     write-json-file "^3.2.0"
+
+ws@^7.3.1:
+  version "7.5.9"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
+  integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
 
 xtend@~4.0.1:
   version "4.0.2"
